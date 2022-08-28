@@ -1,4 +1,5 @@
 const usersService = require('../services/usersServices');
+const CustomError = require('../errors/CustomError');
 
 const create = async (req, res) => {
   const user = req.body;
@@ -12,7 +13,15 @@ const findAll = async (_req, res) => {
   res.status(200).json(users);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+  const user = await usersService.findById(id);
+  if (user === null) throw new CustomError(404, 'User does not exist');
+  res.status(200).json(user);
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
