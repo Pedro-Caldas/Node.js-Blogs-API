@@ -5,6 +5,12 @@ const CustomError = require('../errors/CustomError');
 
 const { JWT_SECRET } = process.env;
 
+if (!JWT_SECRET) {
+  const error = new Error();
+  error.message = 'JWT_SECRET wasn\'t defined at .env';
+  throw error;
+}
+
 const getByEmail = async (email, password) => {
   const result = await User.findOne({ where: { email, password } });
   if (!result) return null;
@@ -35,8 +41,17 @@ const create = async (user) => {
   return token;
 };
 
+const findAll = async () => {
+  const users = User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+
+  return users;
+};
+
 module.exports = {
   getByEmail,
   verifyEmail,
   create,
+  findAll,
 };

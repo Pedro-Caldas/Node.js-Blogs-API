@@ -7,6 +7,12 @@ const create = async (req, res) => {
   res.status(201).json({ token });
 };
 
+const findAll = async (_req, res) => {
+  const users = await usersService.findAll();
+  res.status(200).json(users);
+};
+
 module.exports = {
   create,
+  findAll,
 };

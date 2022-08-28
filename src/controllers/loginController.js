@@ -30,7 +30,12 @@ const login = async (req, res) => {
     const validUser = await getByEmail(email, password);
     if (!validUser) return res.status(400).json({ message: 'Invalid fields' });
 
-    const token = jwt.sign({ email }, JWT_SECRET);
+    const jwtConfig = {
+      expiresIn: '7d',
+      algorithm: 'HS256',
+    };
+
+    const token = jwt.sign({ email }, JWT_SECRET, jwtConfig);
     return res.status(200).json({ token });
   } catch (err) {
     return res.status(500).json({ message: 'Internal error', error: err.message });
