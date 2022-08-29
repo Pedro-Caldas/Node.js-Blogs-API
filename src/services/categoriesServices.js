@@ -12,7 +12,18 @@ const findAll = async () => {
   return categories;
 };
 
+const verifyCategories = async (categoriesIds) => {
+  const categories = await Category.findAll();
+  const existingIds = categories.map((category) => category.id);
+  let validCategories = 0;
+  categoriesIds.forEach((el) => {
+    if (existingIds.includes(el)) validCategories += 1;
+  });
+  if (validCategories === 0) throw new CustomError(400, '"categoryIds" not found');
+};
+
 module.exports = {
   create,
   findAll,
+  verifyCategories,
 };

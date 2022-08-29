@@ -4,6 +4,7 @@ const errorMiddleware = require('./middlewares/error');
 const loginRouter = require('./routes/loginRoutes');
 const usersRouter = require('./routes/usersRoutes');
 const categoriesRouter = require('./routes/categoriesRoutes');
+const postsRouter = require('./routes/postsRoutes');
 
 // ...
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/login', loginRouter);
 app.use('/user', usersRouter);
 app.use('/categories', categoriesRouter);
+app.use('/post', postsRouter);
 
 app.use(errorMiddleware);
 
