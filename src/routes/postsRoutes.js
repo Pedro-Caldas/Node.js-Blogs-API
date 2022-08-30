@@ -10,6 +10,7 @@ route.post('/',
   tokenValidation.tokenMiddleware,
   postValidation.postMiddleware,
   postsController.create);
+route.get('/search', tokenValidation.tokenMiddleware, postsController.search);
 route.get('/', tokenValidation.tokenMiddleware, postsController.findAll);
 route.get('/:id', tokenValidation.tokenMiddleware, postsController.findById);
 route.put('/:id',

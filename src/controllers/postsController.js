@@ -1,6 +1,12 @@
 const postsServices = require('../services/postsServices');
 const categoriesServices = require('../services/categoriesServices');
 
+const search = async (req, res) => {
+  const { q } = req.query;
+  const postsArr = await postsServices.search(q);
+  res.status(200).json(postsArr);
+};
+
 const create = async (req, res) => {
   const userId = req.user.id;
   const { title, content, categoryIds } = req.body;
@@ -36,6 +42,7 @@ const destroy = async (req, res) => {
 };
 
 module.exports = {
+  search,
   create,
   findAll,
   findById,

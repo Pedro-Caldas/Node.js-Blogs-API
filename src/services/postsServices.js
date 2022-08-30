@@ -1,5 +1,22 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, User, Category, sequelize } = require('../database/models');
 const CustomError = require('../errors/CustomError');
+
+const search = async (q) => {
+  const postsArr = await BlogPost.findAll({
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    },
+    {
+      model: Category,
+      as: 'categories',
+    }], 
+    where: { [Op.or]: [{ title: { [Op.like]: `%${q}%` } }, { content: { [Op.like]: `%${q}%` } }] },
+  });
+  return postsArr;
+};
 
 const create = async ({ title, content, categoryIds, userId }) => {
   const transactionResult = await sequelize.transaction(async (transaction) => {
@@ -75,6 +92,7 @@ const destroy = async ({ userId, id }) => {
 };
 
 module.exports = {
+  search,
   create,
   findAll,
   findById,
