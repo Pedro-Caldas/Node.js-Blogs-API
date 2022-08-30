@@ -28,9 +28,17 @@ const update = async (req, res) => {
   res.status(200).json(post);
 };
 
+const destroy = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  await postsServices.destroy({ userId, id });
+  res.status(204).end();
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   update,
+  destroy,
 };

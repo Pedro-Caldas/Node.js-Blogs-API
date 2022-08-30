@@ -16,5 +16,6 @@ route.put('/:id',
   tokenValidation.tokenMiddleware,
   postValidation.updatePostMiddleware,
   postsController.update);
+route.delete('/:id', tokenValidation.tokenMiddleware, postsController.destroy);
 
 module.exports = route;
