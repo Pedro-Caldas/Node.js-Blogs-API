@@ -20,8 +20,17 @@ const findById = async (req, res) => {
   res.status(200).json(post);
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const userId = req.user.id;
+  const post = await postsServices.update({ userId, id, title, content });
+  res.status(200).json(post);
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  update,
 };

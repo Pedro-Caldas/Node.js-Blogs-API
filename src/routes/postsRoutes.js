@@ -12,5 +12,9 @@ route.post('/',
   postsController.create);
 route.get('/', tokenValidation.tokenMiddleware, postsController.findAll);
 route.get('/:id', tokenValidation.tokenMiddleware, postsController.findById);
+route.put('/:id',
+  tokenValidation.tokenMiddleware,
+  postValidation.updatePostMiddleware,
+  postsController.update);
 
 module.exports = route;
