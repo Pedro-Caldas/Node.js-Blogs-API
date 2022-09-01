@@ -19,7 +19,7 @@ As users can only change the data referring to their own blog, we used **JWT** (
 >MySQL
 
 ## Instructions to utilize the application
-After cloning the repository, you need to install the necessary dependencies with the `npm install` command and start the project with the `npm start` command. After that, you can make requests using an **HTTP client** (Insomnia, Postman, HTTPie, etc.).
+After cloning the repository, you need to install the necessary dependencies with the `npm install` command and start the project with the `npm start` command. You can create the database with `npm run prestart` or drop it with `npm run drop`. To populate its tables, use `npm run seed`. After that, you can make requests to the API using an **HTTP client** (Insomnia, Postman, HTTPie, etc.).
 
 
 <details>
